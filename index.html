@@ -125,6 +125,9 @@
   }
   window.addEventListener('error', function (e) { showErrorBanner(e.message); });
   window.addEventListener('unhandledrejection', function (e) { showErrorBanner(e.reason?.message || String(e.reason)); });
+  document.addEventListener('click', function(){
+    document.querySelectorAll('[id^="gbl-menu-"],[id^="glsg-menu-"]').forEach(function(x){x.style.display='none';});
+  });
 </script>
 
 <script type="text/babel">
@@ -1156,7 +1159,23 @@ function ProduccionApp() {
             <button className={`module-tab ${vista === "produccion" ? "active" : ""}`} onClick={() => setVista("produccion")}>Producción</button>
             <button className={`module-tab ${vista === "bitacora" ? "active" : ""}`} onClick={() => setVista("bitacora")}>Bitácora</button>
           </div>
-          <a className="back-link" href={HUB_URL}>← Módulo de Gestión</a>
+          <div style={{position:"relative",display:"inline-flex"}}>
+        <button type="button" onClick={function(e){e.stopPropagation();var m=document.getElementById("glsg-menu-produccion");var open=m.style.display==="block";document.querySelectorAll('[id^="gbl-menu-"],[id^="glsg-menu-"]').forEach(function(x){x.style.display="none";});m.style.display=open?"none":"block";}}
+          style={{display:"inline-flex",alignItems:"center",gap:6,fontSize:12,color:"#7ECAD4",fontWeight:500,background:"none",border:"none",cursor:"pointer",padding:0,fontFamily:"inherit"}}>
+          🏠 GESTOR LA SIN GLUTEN <span style={{fontSize:9}}>▾</span>
+        </button>
+        <div id="glsg-menu-produccion" onClick={function(e){e.stopPropagation();}}
+          style={{display:"none",position:"absolute",top:"calc(100% + 6px)",right:0,minWidth:270,maxHeight:"65vh",overflowY:"auto",background:"#fff",borderRadius:10,boxShadow:"0 10px 30px rgba(0,0,0,.3)",padding:6,zIndex:9999,textAlign:"left"}}>
+          <a href="https://crm-lasingluten.github.io/modulo-gestion-la-sin-gluten/" target="_top" style={{display:"block",padding:"8px 10px",borderRadius:6,color:"#333",fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:"0.03em",textDecoration:"none",borderBottom:"1px solid #eee",marginBottom:4}}>🏠 Portal — todos los módulos</a>
+          <a key="crm" href="https://crm-lasingluten.github.io/crm-panificadora/" target="_top" style={{display:"block",padding:"8px 10px",borderRadius:6,color:"#222",fontSize:12,textDecoration:"none"}}>01 \u00b7 CRM</a>
+          <a key="costos" href="https://crm-lasingluten.github.io/MODULO-DE-COSTOS/" target="_top" style={{display:"block",padding:"8px 10px",borderRadius:6,color:"#222",fontSize:12,textDecoration:"none"}}>02 \u00b7 Costos</a>
+          <a key="procesos" href="https://crm-lasingluten.github.io/procesos-la-sin-gluten/" target="_top" style={{display:"block",padding:"8px 10px",borderRadius:6,color:"#222",fontSize:12,textDecoration:"none"}}>03 \u00b7 Procesos</a>
+          <a key="catalogos" href="https://crm-lasingluten.github.io/-catalogo-la-sin-gluten/" target="_top" style={{display:"block",padding:"8px 10px",borderRadius:6,color:"#222",fontSize:12,textDecoration:"none"}}>04 \u00b7 Catálogos</a>
+          <a key="recetas" href="https://crm-lasingluten.github.io/recetaslasingluten/" target="_top" style={{display:"block",padding:"8px 10px",borderRadius:6,color:"#222",fontSize:12,textDecoration:"none"}}>05 \u00b7 Recetas</a>
+          <a key="actas" href="https://crm-lasingluten.github.io/ACTAS/" target="_top" style={{display:"block",padding:"8px 10px",borderRadius:6,color:"#222",fontSize:12,textDecoration:"none"}}>06 \u00b7 Actas</a>
+          <div style={{display:"block",padding:"8px 10px",borderRadius:6,background:"rgba(0,0,0,.05)",fontWeight:600,color:"#111",fontSize:12}}>07 \u00b7 Producción <span style={{fontWeight:400,opacity:.55}}>(aquí)</span></div>
+        </div>
+      </div>
         </div>
       </nav>
       <div className="wrap">
